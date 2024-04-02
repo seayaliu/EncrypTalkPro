@@ -1,18 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.EncrypTalk" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- Primary EncrypTalk colors. -->
-        <item name="colorPrimary">@color/primary_blue</item>
-        <item name="colorPrimaryVariant">@color/primary_blue</item>
-        <!-- Secondary EncrypTalk colors. -->
-        <item name="colorSecondary">@color/secondary_grey</item>
-        <item name="colorSecondaryVariant">@color/secondary_grey</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Background EncrypTalk colors. -->
-        <item name="android:windowBackground">@color/background_grey</item>
-        <!-- EncrypTalk status bar colors. -->
-        <item name="android:statusBarColor">@color/primary_blue</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/navy_blue</item> <!-- A navy blue shade -->
+        <item name="colorPrimaryVariant">@color/deep_sky_blue</item> <!-- A deeper shade of blue for depth -->
+        <item name="colorOnPrimary">@color/pale_pink</item> <!-- A pale pink for text on primary color backgrounds -->
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/dusky_pink</item> <!-- A dusky pink for a soft appearance -->
+        <item name="colorSecondaryVariant">@color/vibrant_pink</item> <!-- A vibrant pink for contrast -->
+        <item name="colorOnSecondary">@color/almost_white</item> <!-- An almost white color for text on secondary color backgrounds -->
+
+        <!-- Tertiary brand color for accents. -->
+        <item name="colorTertiary">@color/soft_cyan</item> <!-- A soft cyan for accents -->
+        <item name="colorOnTertiary">@color/charcoal_grey</item> <!-- A charcoal grey for text on tertiary backgrounds -->
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/dark_slate_blue</item> <!-- A dark slate blue for the status bar -->
+
+        <!-- Customize your theme here. -->
     </style>
 
 </resources>
