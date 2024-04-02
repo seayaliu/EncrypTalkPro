@@ -14,7 +14,8 @@
     <ImageView
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:src="@drawable/encryptalklogocircle" />
+        android:src="@drawable/logowithframe"
+        android:layout_marginBottom="15dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="Enter a username"
+        android:text="Create a username:"
         android:textStyle="bold"
         android:textSize="25sp"/>
 
@@ -43,7 +44,9 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:hint="Username"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:textStyle="italic"
+            android:id="@+id/create_username"/>
 
     </LinearLayout>
 
@@ -51,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="Enter your work email"
+        android:text="Enter your work email:"
         android:textStyle="bold"
         android:textSize="25sp"/>
 
@@ -64,8 +67,10 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:hint="Work Email"
+            android:textStyle="italic"
             android:inputType="textEmailAddress"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:id="@+id/enter_email"/>/>
 
     </LinearLayout>
 
@@ -73,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="Enter your password"
+        android:text="Create a password:"
         android:textStyle="bold"
         android:textSize="25sp"/>
 
@@ -86,8 +91,10 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:hint="Password"
+            android:textStyle="italic"
             android:inputType="textPassword"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:id="@+id/create_password"/>
 
     </LinearLayout>
     
@@ -96,7 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Create account"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:id="@+id/create_acc_btn"/>
 
 
 </LinearLayout>
