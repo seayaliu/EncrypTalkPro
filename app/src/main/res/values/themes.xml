@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EncrypTalk" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- Primary EncrypTalk colors. -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/primary_blue</item>
+        <!-- Secondary EncrypTalk colors. -->
+        <item name="colorSecondary">@color/secondary_grey</item>
+        <item name="colorSecondaryVariant">@color/secondary_grey</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Background EncrypTalk colors. -->
+        <item name="android:windowBackground">@color/background_grey</item>
+        <!-- EncrypTalk status bar colors. -->
+        <item name="android:statusBarColor">@color/primary_blue</item>
+    </style>
+
+    <style name="Theme.EncrypTalk" parent="Base.Theme.EncrypTalk" />
+</resources>
