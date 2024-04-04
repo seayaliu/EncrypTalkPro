@@ -8,8 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:layout_margin="30sp"
-    tools:context=".CreateAccountActivity">
-
+    tools:context=".LoginActivity">
 
     <ImageView
         android:layout_width="160dp"
@@ -21,34 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Create an account"
+        android:text="Account Login"
         android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_marginBottom="15dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="Create a username:"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:hint="Username"
-            android:layout_margin="5dp"
-            android:textStyle="italic"
-            android:id="@+id/username"/>
-
-    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -71,14 +47,13 @@
             android:inputType="textEmailAddress"
             android:layout_margin="5dp"
             android:id="@+id/email"/>
-
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="Create a password:"
+        android:text="Enter your password:"
         android:textStyle="bold"
         android:textSize="20sp"/>
 
@@ -97,22 +72,22 @@
             android:id="@+id/password"/>
 
     </LinearLayout>
-    
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Create account"
+        android:text="LOGIN"
         android:textColor="@color/white"
-        android:id="@+id/create_acc_btn"/>
+        android:id="@+id/login_btn"/>
 
     <TextView
         android:textSize="15sp"
         android:layout_marginTop="5sp"
         android:textStyle="italic"
-        android:id="@+id/loginNow"
+        android:id="@+id/createAccNow"
         android:gravity="center"
-        android:text="Click here to login"
+        android:text="Click here to create an account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -122,7 +97,6 @@
         android:layout_marginTop="8sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
 
 
 </LinearLayout>
