@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseUser user;
-    TextView landing;
     Button logoutBtn;
 
     @Override
@@ -38,16 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        landing = findViewById(R.id.encryptalk); // temporary placeholder
         logoutBtn = findViewById(R.id.logout_btn);
-        if (user == null) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            // landing.setText(user.getEmail()); // review this
-        }
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
