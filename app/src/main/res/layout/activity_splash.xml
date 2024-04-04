@@ -23,11 +23,12 @@
             android:layout_marginTop="20dp"
             android:fontFamily="monospace"
             android:text="EncrypTalk"
-            android:textColor="@color/dusky_pink"
+            android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold" />
 
         <ProgressBar
+            android:layout_marginTop="10dp"
             android:layout_width="32dp"
             android:layout_height="wrap_content" />
 
