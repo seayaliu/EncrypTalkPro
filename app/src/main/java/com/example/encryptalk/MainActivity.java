@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         chatFragment = new ChatFragment();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        searchButton = findViewById(R.id.main_search_btn);
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
