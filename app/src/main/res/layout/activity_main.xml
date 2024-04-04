@@ -44,6 +44,14 @@
         android:gravity="center">
 
 
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50sp"
+            android:layout_marginRight="50sp"
+            android:text="Logout"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
@@ -53,14 +61,6 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50sp"
-            android:layout_marginRight="50sp"
-            android:text="Logout"
-            android:textColor="@color/white"
-            android:id="@+id/logout_btn"/>
     </LinearLayout>
 
 

@@ -57,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        searchButton = findViewById(R.id.search_person);
+
+        searchButton.setOnClickListener((v)->{
+            startActivity(new Intent(MainActivity.this,SearchUser.class));
+        });
 
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
