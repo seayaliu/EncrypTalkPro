@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="Username"
+            android:background="@color/material_dynamic_secondary80"
             android:padding="10dp"
             android:elevation="4dp"
             android:layout_toLeftOf="@id/search_user_btn"
