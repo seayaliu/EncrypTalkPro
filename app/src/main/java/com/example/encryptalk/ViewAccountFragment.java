@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,14 +44,13 @@ public class ViewAccountFragment extends Fragment {
         profile = view.findViewById(R.id.user_icon);
 
         username = view.findViewById(R.id.view_username);
-        name = view.findViewById(R.id.view_name);
-        email = view.findViewById(R.id.view_email);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         mStore = FirebaseFirestore.getInstance();
 
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -70,17 +70,11 @@ public class ViewAccountFragment extends Fragment {
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         // User data exists
-                        String getUser = documentSnapshot.getString("Username");
-                        String getName = documentSnapshot.getString("Name");
-                        String getEmail = documentSnapshot.getString("Email");
+                        String getUser = documentSnapshot.getString("username");
                         username.setText(getUser);
-                        name.setText(getName);
-                        email.setText(getEmail);
                     } else {
                         // Document doesn't exist
                         username.setText("No username found");
-                        name.setText("No name found");
-                        email.setText("No email found");
                     }
                 });
     }

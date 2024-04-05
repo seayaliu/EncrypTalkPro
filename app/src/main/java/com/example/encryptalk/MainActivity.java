@@ -6,14 +6,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -57,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
         viewAccountFragment = new ViewAccountFragment();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        searchButton = findViewById(R.id.search_person);
-
-        searchButton.setOnClickListener((v)->{
-            startActivity(new Intent(MainActivity.this,SearchUser.class));
-        });
 
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -71,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,chatFragment).commit();
                 }
                 if(item.getItemId()==R.id.menu_profile){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,viewAccountFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, viewAccountFragment).commit();
                 }
                 return true;
             }
