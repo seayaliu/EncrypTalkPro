@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+// The following code is inspired by https://www.youtube.com/watch?v=QAKq8UBv4GI&ab_channel=CodesEasy
 public class LoginActivity extends AppCompatActivity {
 
     EditText emailInput;

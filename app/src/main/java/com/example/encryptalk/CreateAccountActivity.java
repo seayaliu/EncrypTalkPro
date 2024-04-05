@@ -33,9 +33,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+// The following code is inspired by https://www.youtube.com/watch?v=QAKq8UBv4GI&ab_channel=CodesEasy
 public class CreateAccountActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
+
+    EditText nameInput;
     EditText usernameInput;
     EditText emailInput;
     EditText passwordInput;
@@ -72,6 +75,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
         mAuth = FirebaseAuth.getInstance();
         mStore = FirebaseFirestore.getInstance();
+        nameInput = findViewById(R.id.full_name);
         usernameInput = findViewById(R.id.username);
         emailInput = findViewById(R.id.email);
         passwordInput = findViewById(R.id.password);
@@ -93,10 +97,11 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password, username;
+                String email, password, username, name;
                 email = String.valueOf(emailInput.getText());
                 password = String.valueOf(passwordInput.getText());
                 username = String.valueOf(usernameInput.getText());
+                name = String.valueOf(nameInput.getText());
 
                 // might delete create username so not checking if there's text rn
 
@@ -123,6 +128,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     DocumentReference docRef = mStore.collection("users").document(userId);
                                     Map<String, Object> user = new HashMap<>();
                                     user.put("Username", username);
+                                    user.put("Name", name);
                                     user.put("Email", email);
                                     docRef.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

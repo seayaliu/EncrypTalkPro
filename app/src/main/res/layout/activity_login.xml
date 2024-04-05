@@ -11,8 +11,8 @@
     tools:context=".LoginActivity">
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/logowithframe"
         android:layout_marginBottom="15dp"/>
 
