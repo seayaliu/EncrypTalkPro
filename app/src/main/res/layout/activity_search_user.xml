@@ -60,7 +60,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/navy_blue"
             android:padding="4dp"
             android:layout_margin="10dp"
             android:id="@+id/search_user_btn"/>

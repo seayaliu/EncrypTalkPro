@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    ImageButton searchButton;
+    ImageButton searchBtn;
     ChatFragment chatFragment;
     ViewAccountFragment viewAccountFragment;
 
@@ -32,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        searchBtn = findViewById(R.id.search_person);
         logoutBtn = findViewById(R.id.logout_btn);
+
+        searchBtn.setOnClickListener((v)-> {
+            Intent intent = new Intent(MainActivity.this, SearchUser.class);
+            startActivity(intent);
+        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
