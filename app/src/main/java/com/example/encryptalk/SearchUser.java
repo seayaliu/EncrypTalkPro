@@ -46,7 +46,7 @@ public class SearchUser extends AppCompatActivity {
 
         searchButton.setOnClickListener(v -> {
             String searchTerm = searchInput.getText().toString();
-            if(searchTerm.isEmpty() || searchTerm.length()<3){
+            if(searchTerm.isEmpty() || searchTerm.length()<4){
                 searchInput.setError("Invalid Username");
                 return;
             }

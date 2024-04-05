@@ -31,15 +31,4 @@ public class SplashActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            }
-        }, 8000);
-    }
 }
