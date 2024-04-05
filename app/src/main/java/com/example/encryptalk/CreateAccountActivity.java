@@ -21,21 +21,31 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.encryptalk.authentication.AccountAuthentication;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
+    public static final String TAG = "TAG";
     EditText usernameInput;
     EditText emailInput;
     EditText passwordInput;
     Button accountBtn;
     FirebaseAuth mAuth;
+    FirebaseFirestore mStore;
     ProgressBar progressBar;
     TextView switchLogin;
+
+    String userId;
 
 
     @Override
@@ -61,6 +71,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             return insets;
         });
         mAuth = FirebaseAuth.getInstance();
+        mStore = FirebaseFirestore.getInstance();
         usernameInput = findViewById(R.id.username);
         emailInput = findViewById(R.id.email);
         passwordInput = findViewById(R.id.password);
@@ -82,9 +93,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
+                String email, password, username;
                 email = String.valueOf(emailInput.getText());
                 password = String.valueOf(passwordInput.getText());
+                username = String.valueOf(usernameInput.getText());
 
                 // might delete create username so not checking if there's text rn
 
@@ -107,6 +119,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(CreateAccountActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
+                                    userId = mAuth.getCurrentUser().getUid();
+                                    DocumentReference docRef = mStore.collection("users").document(userId);
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("Username", username);
+                                    user.put("Email", email);
+                                    docRef.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.d(TAG, "onSuccess: user profile has been created for "+ userId);
+                                        }
+                                    });
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
