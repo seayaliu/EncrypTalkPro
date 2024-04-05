@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ViewAccountFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:src="@drawable/profile_user"
+            app:tint="@color/navy_blue"
+            android:id="@+id/user_icon"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_username"
+            android:layout_marginTop="20dp"
+            android:text="Username"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_name"
+            android:layout_marginTop="5dp"
+            android:text="Full Name"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_email"
+            android:layout_marginTop="5dp"
+            android:text="Email"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
