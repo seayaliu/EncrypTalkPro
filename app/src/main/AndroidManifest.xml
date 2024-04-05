@@ -30,6 +30,9 @@
             android:name=".CreateAccountActivity"
             android:exported="false" />
         <activity
+            android:name=".KeyManager"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

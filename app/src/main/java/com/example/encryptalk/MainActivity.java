@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         searchBtn.setOnClickListener((v)-> {
             Intent intent = new Intent(MainActivity.this, SearchUser.class);
             startActivity(intent);
+            intent = new Intent(MainActivity.this, KeyManager.class);
+            startActivity(intent);
         });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
