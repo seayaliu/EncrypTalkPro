@@ -55,5 +55,6 @@ public class SearchUser extends AppCompatActivity {
     }
     void setupSearchRecyclerView (String search){
 
+
     }
 }
