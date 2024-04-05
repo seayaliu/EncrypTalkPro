@@ -19,6 +19,12 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.encryptalk.adapter.SearchUserRecyclerAdapter;
+import com.example.encryptalk.utils.FireBaseUtil;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.Query;
+import com.example.encryptalk.model.UserInfo;
 
 public class SearchUser extends AppCompatActivity {
 
@@ -26,6 +32,8 @@ public class SearchUser extends AppCompatActivity {
     ImageButton searchButton;
     ImageButton backButton;
     RecyclerView recyclerView;
+
+    SearchUserRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +63,39 @@ public class SearchUser extends AppCompatActivity {
     }
     void setupSearchRecyclerView (String search){
 
+        Query query = FireBaseUtil.allUserCollectionReference()
+                .whereGreaterThanOrEqualTo("username", search);
 
+        FirestoreRecyclerOptions<UserInfo> options = new FirestoreRecyclerOptions.Builder<UserInfo>()
+                .setQuery(query, UserInfo.class).build();
+
+        adapter = new SearchUserRecyclerAdapter(options, getApplicationContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (adapter != null) {
+            adapter.startListening();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter != null) {
+            adapter.startListening();
+        }
     }
 }
