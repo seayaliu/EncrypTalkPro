@@ -107,7 +107,7 @@
         android:id="@+id/create_acc_btn"/>
 
     <TextView
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_marginTop="5sp"
         android:textStyle="italic"
         android:id="@+id/loginNow"
