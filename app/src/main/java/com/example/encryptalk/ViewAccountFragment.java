@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,16 +40,16 @@ public class ViewAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_account, container, false);
-        profile = view.findViewById(R.id.user_icon);
+/*        profile = view.findViewById(R.id.user_icon);
 
         username = view.findViewById(R.id.view_username);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        mStore = FirebaseFirestore.getInstance();
+        mStore = FirebaseFirestore.getInstance();*/
 
         return view;
     }
-
+/*
     @Override
     public void onStart() {
         super.onStart();
@@ -85,5 +84,5 @@ public class ViewAccountFragment extends Fragment {
         if (listener != null) {
             listener.remove();
         }
-    }
+    }*/
 }
