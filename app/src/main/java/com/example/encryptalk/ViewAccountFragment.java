@@ -40,16 +40,17 @@ public class ViewAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_account, container, false);
-/*        profile = view.findViewById(R.id.user_icon);
+        profile = view.findViewById(R.id.user_icon);
 
         username = view.findViewById(R.id.view_username);
+        name = view.findViewById(R.id.view_name);
+        email = view.findViewById(R.id.view_email);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        mStore = FirebaseFirestore.getInstance();*/
+        mStore = FirebaseFirestore.getInstance();
 
         return view;
     }
-/*
     @Override
     public void onStart() {
         super.onStart();
@@ -69,11 +70,17 @@ public class ViewAccountFragment extends Fragment {
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         // User data exists
-                        String getUser = documentSnapshot.getString("username");
+                        String getUser = documentSnapshot.getString("Username");
+                        String getName = documentSnapshot.getString("Name");
+                        String getEmail = documentSnapshot.getString("Email");
                         username.setText(getUser);
+                        name.setText(getName);
+                        email.setText(getEmail);
                     } else {
                         // Document doesn't exist
                         username.setText("No username found");
+                        name.setText("No name found");
+                        email.setText("No email found");
                     }
                 });
     }
@@ -84,5 +91,5 @@ public class ViewAccountFragment extends Fragment {
         if (listener != null) {
             listener.remove();
         }
-    }*/
+    }
 }
