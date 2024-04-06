@@ -70,7 +70,7 @@ public class ViewAccountFragment extends Fragment {
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         // User data exists
-                        String getUser = documentSnapshot.getString("username");
+                        String getUser = documentSnapshot.getString("Username");
                         username.setText(getUser);
                     } else {
                         // Document doesn't exist

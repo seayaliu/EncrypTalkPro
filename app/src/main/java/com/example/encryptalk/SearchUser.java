@@ -54,7 +54,7 @@ public class SearchUser extends AppCompatActivity {
 
         searchButton.setOnClickListener(v -> {
             String searchTerm = searchInput.getText().toString();
-            if(searchTerm.isEmpty() || searchTerm.length()<4){
+            if(searchTerm.isEmpty() || searchTerm.length()<3){
                 searchInput.setError("Invalid Username");
                 return;
             }
@@ -64,7 +64,8 @@ public class SearchUser extends AppCompatActivity {
     void setupSearchRecyclerView (String search){
 
         Query query = FireBaseUtil.allUserCollectionReference()
-                .whereGreaterThanOrEqualTo("username", search);
+                .whereGreaterThanOrEqualTo("Username", search)
+                .whereLessThanOrEqualTo("Username",search+'\uf8ff');
 
         FirestoreRecyclerOptions<UserInfo> options = new FirestoreRecyclerOptions.Builder<UserInfo>()
                 .setQuery(query, UserInfo.class).build();

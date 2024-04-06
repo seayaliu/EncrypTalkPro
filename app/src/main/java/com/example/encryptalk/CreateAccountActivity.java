@@ -130,6 +130,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     user.put("Username", username);
                                     user.put("Name", name);
                                     user.put("Email", email);
+                                    user.put("UserId", userId);
                                     docRef.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {

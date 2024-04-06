@@ -4,43 +4,57 @@ import com.google.firebase.Timestamp;
 
 
 public class UserInfo {
-    private String username;
-    private Timestamp createdTimestamp;
-    private String userId;
+
+    private String Email;
+
+    private String Name;
+    private String Username;
+
+    // private Timestamp createdTimestamp;
+    private String UserId;
     private String fcmToken;
 
     public UserInfo() {
     }
 
-    public UserInfo(String phone, String username, Timestamp createdTimestamp,String userId) {
-        this.username = username;
-        this.createdTimestamp = createdTimestamp;
-        this.userId = userId;
+    public UserInfo(String email, String name, String username, String userId) {
+        this.Email = email;
+        this.Name = name;
+        this.Username = username;
+        // this.createdTimestamp = createdTimestamp;
+        this.UserId = userId;
     }
 
+    public String getEmail() { return Email; }
+
+    public void setEmail(String email) { this.Email = email; }
+
+    public String getName() { return Name; }
+
+    public void setName(String name) { this.Name = name; }
 
     public String getUsername() {
-        return username;
+        return Username;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.Username = username;
     }
 
-    public Timestamp getCreatedTimestamp() {
-        return createdTimestamp;
-    }
+//    public Timestamp getCreatedTimestamp() {
+//        return createdTimestamp;
+//    }
 
-    public void setCreatedTimestamp(Timestamp createdTimestamp) {
-        this.createdTimestamp = createdTimestamp;
-    }
+//    public void setCreatedTimestamp(Timestamp createdTimestamp) {
+//        this.createdTimestamp = createdTimestamp;
+//    }
 
     public String getUserId() {
-        return userId;
+        return UserId;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.UserId = userId;
     }
 
     public String getFcmToken() {
