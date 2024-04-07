@@ -124,6 +124,7 @@
     
     <Button
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Create account"
@@ -132,6 +133,7 @@
 
     <TextView
         android:textSize="20sp"
+        android:visibility="visible"
         android:layout_marginTop="5sp"
         android:textStyle="italic"
         android:id="@+id/loginNow"
@@ -146,6 +148,17 @@
         android:layout_marginTop="8sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="LOGIN NOW"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/soft_cyan"
+        android:id="@+id/acc_created_btn"/>
+
 
 
 

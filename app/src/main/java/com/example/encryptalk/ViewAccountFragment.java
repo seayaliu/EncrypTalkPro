@@ -49,15 +49,12 @@ public class ViewAccountFragment extends Fragment {
         user = mAuth.getCurrentUser();
         mStore = FirebaseFirestore.getInstance();
 
-        return view;
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
         user = mAuth.getCurrentUser();
         if (user != null) {
             loadUserData(user.getUid());
         }
+
+        return view;
     }
 
     private void loadUserData(String userId) {
@@ -67,7 +64,6 @@ public class ViewAccountFragment extends Fragment {
                         return;
                     }
                     if (documentSnapshot != null && documentSnapshot.exists()) {
-                        // User data exists
                         String getUser = documentSnapshot.getString("Username");
                         String getName = documentSnapshot.getString("Name");
                         String getEmail = documentSnapshot.getString("Email");
@@ -75,7 +71,6 @@ public class ViewAccountFragment extends Fragment {
                         name.setText(getName);
                         email.setText(getEmail);
                     } else {
-                        // Doesn't exist
                         username.setText("No username found");
                         name.setText("No name found");
                         email.setText("No email found");

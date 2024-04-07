@@ -48,6 +48,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView switchLogin;
 
+    Button loginBtn;
+
     String userId;
 
 
@@ -82,8 +84,18 @@ public class CreateAccountActivity extends AppCompatActivity {
         accountBtn = findViewById(R.id.create_acc_btn);
         progressBar = findViewById(R.id.progressBar);
         switchLogin = findViewById(R.id.loginNow);
+        loginBtn = findViewById(R.id.acc_created_btn);
 
         switchLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -105,13 +117,30 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 // might delete create username so not checking if there's text rn
 
+                if (TextUtils.isEmpty(name)) {
+                    Toast.makeText(CreateAccountActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(username)) {
+                    Toast.makeText(CreateAccountActivity.this, "Enter Username", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(CreateAccountActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(CreateAccountActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(CreateAccountActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                boolean workEmail = email.endsWith("@workplace.ca");
+
+                if (!workEmail) {
+                    Toast.makeText(CreateAccountActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -124,6 +153,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(CreateAccountActivity.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
+                                    accountBtn.setVisibility(View.GONE);
+                                    loginBtn.setVisibility(View.VISIBLE);
+                                    switchLogin.setVisibility(View.GONE);
                                     userId = mAuth.getCurrentUser().getUid();
                                     DocumentReference docRef = mStore.collection("users").document(userId);
                                     Map<String, Object> user = new HashMap<>();
