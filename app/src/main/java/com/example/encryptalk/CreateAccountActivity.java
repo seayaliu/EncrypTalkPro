@@ -27,7 +27,9 @@ import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -51,6 +53,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     Button loginBtn;
 
     String userId;
+    boolean workEmail;
 
 
     @Override
@@ -137,12 +140,23 @@ public class CreateAccountActivity extends AppCompatActivity {
                     return;
                 }
 
-                boolean workEmail = email.endsWith("@workplace.ca");
+/*                CollectionReference checkEmployee = mStore.collection("employees");
+                checkEmployee.document(email).get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot doc = task.getResult();
+                                if (!doc.exists()) {
+                                    workEmail = false;
+                                } else {workEmail = true;}
+                            } else {
+                                Log.d(TAG, "Error getting document: ", task.getException());
+                            }
+                        });
 
                 if (!workEmail) {
                     Toast.makeText(CreateAccountActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
 
                 // The following method is modified from the Firebase Authentication Documentation: https://firebase.google.com/docs/auth/android/password-auth?_gl=1*ax5d2t*_up*MQ..*_ga*MTk0NDg3NjEzMS4xNzEyMjYwNjEx*_ga_CW55HF8NVT*MTcxMjI2MDYxMS4xLjAuMTcxMjI2MDYxMS4wLjAuMA..#java_3
                 mAuth.createUserWithEmailAndPassword(email, password)
