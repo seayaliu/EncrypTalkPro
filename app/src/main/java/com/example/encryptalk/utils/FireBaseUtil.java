@@ -67,7 +67,7 @@ public class FireBaseUtil {
         FirebaseAuth.getInstance().signOut();
     }
 
-    public static StorageReference  getCurrentProfilePicStorageRef(){
+/*    public static StorageReference  getCurrentProfilePicStorageRef(){
         return FirebaseStorage.getInstance().getReference().child("profile_pic")
                 .child(FireBaseUtil.currentUserId());
     }
@@ -75,7 +75,8 @@ public class FireBaseUtil {
     public static StorageReference  getOtherProfilePicStorageRef(String otherUserId){
         return FirebaseStorage.getInstance().getReference().child("profile_pic")
                 .child(otherUserId);
-    }
+    }*/
+
 
 
 }
