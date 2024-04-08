@@ -15,6 +15,8 @@
     <color name="dark_slate_blue">#483D8B</color>
     <color name="green">#7CB342</color>
 
+    <color name="grey">#808080</color>
+    <color name="red">#FF0000</color>
 
 
     <color name="black">#000000</color>

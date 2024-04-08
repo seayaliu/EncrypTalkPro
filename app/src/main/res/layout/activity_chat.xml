@@ -26,6 +26,7 @@
             android:id="@+id/other_username"
             android:layout_toRightOf="@id/back_btn"/>
 
+
         <ImageButton
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -34,6 +35,43 @@
             app:tint="@color/white"
             android:layout_centerVertical="true"
             android:id="@+id/back_btn"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/off_btn"
+            android:paddingRight="5dp"
+            android:layout_centerInParent="true"
+            android:text="Self-Destruct Mode:"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="8dp"
+            android:layout_centerInParent="true"
+            android:text="OFF"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            android:id="@+id/off_btn"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="8dp"
+            android:layout_centerInParent="true"
+            android:text="ON"
+            android:textColor="@color/red"
+            android:textSize="15sp"
+            android:id="@+id/on_btn"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 
@@ -78,5 +116,7 @@
             />
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>
