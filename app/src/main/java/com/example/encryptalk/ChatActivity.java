@@ -121,6 +121,7 @@ public class ChatActivity extends AppCompatActivity {
                             ""
                     );
                     FireBaseUtil.getChatroomReference(chatroomId).set(modelMessage);
+                    KeyManager.createKey();
                 }
             }
         });
