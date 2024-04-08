@@ -9,6 +9,8 @@ public class OpenChatModel {
     List<String> userIds; // to store user id on either end
     Timestamp timestamp;
     String lastMsgSenderId;
+    String lastMessage;
+
 
     public OpenChatModel() {
     }
@@ -50,5 +52,14 @@ public class OpenChatModel {
 
     public void setLastMsgSenderId(String lastMsgSenderId) {
         this.lastMsgSenderId = lastMsgSenderId;
+
+    }
+
+    public String getLastMessage() {
+        return lastMessage;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
     }
 }
