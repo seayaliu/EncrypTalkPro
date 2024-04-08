@@ -5,7 +5,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/navy_blue</item> <!-- A navy blue shade -->
         <item name="colorPrimaryVariant">@color/deep_sky_blue</item> <!-- A deeper shade of blue for depth -->
-        <item name="colorOnPrimary">@color/pale_pink</item> <!-- A pale pink for text on primary color backgrounds -->
+        <item name="colorOnPrimary">@color/pale_pink</item><!-- A pale pink for text on primary color backgrounds -->
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/dusky_pink</item> <!-- A dusky pink for a soft appearance -->

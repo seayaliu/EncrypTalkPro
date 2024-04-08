@@ -8,17 +8,22 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.encryptalk.adapter.ChatAdapter;
+import com.example.encryptalk.adapter.SearchUserRecyclerAdapter;
 import com.example.encryptalk.model.OpenChatModel;
 import com.example.encryptalk.model.UserInfo;
 import com.example.encryptalk.model.modelMessage;
 import com.example.encryptalk.utils.AndroidUtil;
 import com.example.encryptalk.utils.FireBaseUtil;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
 
 
 import java.util.Arrays;
@@ -33,6 +38,7 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton backButton;
     TextView otherUsername;
     RecyclerView recyclerView;
+    ChatAdapter adapter;
 
 
     @Override
@@ -62,6 +68,24 @@ public class ChatActivity extends AppCompatActivity {
         }));
 
         getOrCreateOpenChatModel();
+        setChatView();
+
+    }
+
+    void setChatView(){
+        Query query = FireBaseUtil.getChatroomMessageReference(chatroomId)
+                .orderBy("timestamp", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<modelMessage> options = new FirestoreRecyclerOptions.Builder<modelMessage>()
+                .setQuery(query,modelMessage.class).build();
+
+        adapter = new ChatAdapter(options,getApplicationContext());
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setReverseLayout(true);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+
     }
     void sendMessage(String message){
 

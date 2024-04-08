@@ -10,7 +10,7 @@ public class UserInfo {
     private String Name;
     private String Username;
 
-    // private Timestamp createdTimestamp;
+    private Timestamp createdTimestamp;
     private String UserId;
     private String fcmToken;
 
@@ -21,7 +21,7 @@ public class UserInfo {
         this.Email = email;
         this.Name = name;
         this.Username = username;
-        // this.createdTimestamp = createdTimestamp;
+        this.createdTimestamp = createdTimestamp;
         this.UserId = userId;
     }
 
@@ -41,13 +41,13 @@ public class UserInfo {
         this.Username = username;
     }
 
-//    public Timestamp getCreatedTimestamp() {
-//        return createdTimestamp;
-//    }
+   public Timestamp getCreatedTimestamp() {
+       return createdTimestamp;
+   }
 
-//    public void setCreatedTimestamp(Timestamp createdTimestamp) {
-//        this.createdTimestamp = createdTimestamp;
-//    }
+   public void setCreatedTimestamp(Timestamp createdTimestamp) {
+       this.createdTimestamp = createdTimestamp;
+   }
 
     public String getUserId() {
         return UserId;

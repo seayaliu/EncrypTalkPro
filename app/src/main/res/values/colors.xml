@@ -12,6 +12,7 @@
     <color name="charcoal_grey">#36454F</color>
     <color name="dark_slate_blue">#483D8B</color>
 
+    <color name="light_blue">#00ccff</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

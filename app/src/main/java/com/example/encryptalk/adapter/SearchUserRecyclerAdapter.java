@@ -51,14 +51,12 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserInfo
     }
     class UserModelViewHolder extends RecyclerView.ViewHolder{
         TextView usernameText;
-        TextView phoneText;
-        ImageView profilePic;
+
 
         public UserModelViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameText = itemView.findViewById(R.id.user_name_text);
-            phoneText = itemView.findViewById(R.id.phone_text);
-            profilePic = itemView.findViewById(R.id.profile_pic_image_view);
+
         }
     }
 }
