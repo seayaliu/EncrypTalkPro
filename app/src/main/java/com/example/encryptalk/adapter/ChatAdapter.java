@@ -28,8 +28,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
+
+import org.w3c.dom.Document;
 
 import java.util.Base64;
 
@@ -41,14 +51,28 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<modelMessage, ChatAdap
 
     Context context;
     String chatroomId;
+    FirebaseFirestore mStore;
 
-    public ChatAdapter(@NonNull FirestoreRecyclerOptions<modelMessage> options,Context context, String chatroomId) {
+    public ChatAdapter(@NonNull FirestoreRecyclerOptions<modelMessage> options,Context context) {
         super(options);
         this.context = context;
         this.chatroomId = chatroomId;
+        mStore = FirebaseFirestore.getInstance();
     }
     @Override
     protected void onBindViewHolder(@NonNull ChatModelViewHolder holder, int position, @NonNull modelMessage model) {
+        if (model.isSelfDestruct()) {
+            Timestamp messageSent = model.getTimestamp();
+            long currentTimeMS = System.currentTimeMillis();
+            long msgTimeMS = messageSent.toDate().getTime();
+            long timeDiffMS = currentTimeMS - msgTimeMS;
+            long timeDiffS = timeDiffMS / 1000;
+
+            if (timeDiffS >= 30) {
+                deleteMessage(getSnapshots().getSnapshot(position));
+            }
+        }
+
         if(model.getSenderId().equals(FireBaseUtil.currentUserId())){
             holder.leftChatLayout.setVisibility(View.GONE);
             holder.rightChatLayout.setVisibility(View.VISIBLE);
@@ -88,6 +112,10 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<modelMessage, ChatAdap
                 }
             });
         }
+    }
+
+    private void deleteMessage(DocumentSnapshot snapshot) {
+        snapshot.getReference().delete();
     }
     @NonNull
     @Override

@@ -35,6 +35,16 @@
             android:layout_centerVertical="true"
             android:id="@+id/back_btn"/>
 
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="Self-Destruct OFF"
+            android:textOn="Self-Destruct ON"
+            android:layout_alignParentRight="true"
+            android:id="@+id/sd_btn"
+            />
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

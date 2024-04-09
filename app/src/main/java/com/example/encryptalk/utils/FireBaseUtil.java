@@ -60,22 +60,13 @@ public class FireBaseUtil {
     }
 
     public static String timestampToString(Timestamp timestamp){
-        return new SimpleDateFormat("HH:MM").format(timestamp.toDate());
+        return new SimpleDateFormat("HH:mm").format(timestamp.toDate());
     }
 
     public static void logout(){
         FirebaseAuth.getInstance().signOut();
     }
 
-/*    public static StorageReference  getCurrentProfilePicStorageRef(){
-        return FirebaseStorage.getInstance().getReference().child("profile_pic")
-                .child(FireBaseUtil.currentUserId());
-    }
-
-    public static StorageReference  getOtherProfilePicStorageRef(String otherUserId){
-        return FirebaseStorage.getInstance().getReference().child("profile_pic")
-                .child(otherUserId);
-    }*/
 
 
 

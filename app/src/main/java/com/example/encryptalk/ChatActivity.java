@@ -39,6 +39,8 @@ public class ChatActivity extends AppCompatActivity {
     TextView otherUsername;
     RecyclerView recyclerView;
     ChatAdapter adapter;
+    Boolean selfDestruct;
+    ToggleButton sd_btn;
 
 
     @Override
@@ -48,16 +50,37 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         otherUser = AndroidUtil.getUserModelFromIntent(getIntent());
+        otherUsername = findViewById(R.id.other_username);
+        otherUsername.setText(otherUser.getUsername());
+
+
         chatroomId = FireBaseUtil.getChatroomId(FireBaseUtil.currentUserId(), otherUser.getUserId());
+
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageButton = findViewById(R.id.send_message_button);
         backButton = findViewById(R.id.back_btn);
         otherUsername = findViewById(R.id.other_username);
         recyclerView = findViewById(R.id.recycler_view);
+        sd_btn = findViewById(R.id.sd_btn);
+        selfDestruct = sd_btn.isChecked();
+
 
         backButton.setOnClickListener((v) -> {
             onBackPressed();
+        });
+
+        sd_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean checked) {
+                if (checked) {
+                    Toast.makeText(ChatActivity.this, "Self-Destruct ON", Toast.LENGTH_SHORT).show();
+                    selfDestruct = true;
+                } else {
+                    Toast.makeText(ChatActivity.this, "Self-Destruct OFF", Toast.LENGTH_SHORT).show();
+                    selfDestruct = false;
+                }
+            }
         });
 
         sendMessageButton.setOnClickListener((v -> {

@@ -37,11 +37,12 @@
                 android:layout_marginEnd="10dp"
                 android:id="@+id/last_message_time_text"/>
         </RelativeLayout>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="+000000000000"
             android:id="@+id/last_message_text"/>
+
+
     </LinearLayout>
 </LinearLayout>
