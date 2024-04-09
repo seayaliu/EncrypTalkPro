@@ -60,8 +60,9 @@ public class KeyManager extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     QueryDocumentSnapshot document = task.getResult().iterator().next();
                     String users = document.getData().get("userIds").toString();
-                    String user2 = users.substring(1,users.indexOf(","));
-                    String user1 = users.substring(users.indexOf(",") + 2, users.indexOf("]"));
+                    String user1 = users.substring(1,users.indexOf(","));
+                    String user2 = users.substring(users.indexOf(",") + 2, users.indexOf("]"));
+
                     String userId = user1+"_"+user2;
                     DocumentReference docRef = mStore.collection("keys").document(userId);
                     Map<String, Object> keys = new HashMap<>();

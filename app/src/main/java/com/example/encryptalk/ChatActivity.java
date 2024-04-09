@@ -29,7 +29,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -140,9 +142,18 @@ public class ChatActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 modelMessage = task.getResult().toObject(OpenChatModel.class);
                 if (modelMessage ==null) {
+                    ArrayList<String> list = new ArrayList<String>();
+                    if(FireBaseUtil.currentUserId().hashCode()<otherUser.getUserId().hashCode()) {
+                        list.add(FireBaseUtil.currentUserId());
+                        list.add(otherUser.getUserId());
+                    }
+                    else{
+                        list.add(otherUser.getUserId());
+                        list.add(FireBaseUtil.currentUserId());
+                    }
                     modelMessage = new OpenChatModel(
                             chatroomId,
-                            Arrays.asList(FireBaseUtil.currentUserId(), otherUser.getUserId()),
+                            list,
                             Timestamp.now(),
                             "",
                             selfDestruct
