@@ -24,3 +24,7 @@ The chat application was inspired by various online tutorials and information li
 
 
 7- https://sendbird.com/developer/tutorials/android-chat-tutorial-building-a-messaging-ui
+
+
+
+8- https://github.com/hasura/chat-app-android/blob/master/app/src/main/java/com/example/android/chatapp/ChatRecyclerViewAdapter.java
