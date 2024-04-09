@@ -1,9 +1,12 @@
 package com.example.encryptalk;
 
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -141,7 +144,8 @@ public class ChatActivity extends AppCompatActivity {
                             chatroomId,
                             Arrays.asList(FireBaseUtil.currentUserId(), otherUser.getUserId()),
                             Timestamp.now(),
-                            ""
+                            "",
+                            selfDestruct
                     );
                     FireBaseUtil.getChatroomReference(chatroomId).set(modelMessage);
                     KeyManager.createKey();

@@ -53,7 +53,7 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<modelMessage, ChatAdap
     String chatroomId;
     FirebaseFirestore mStore;
 
-    public ChatAdapter(@NonNull FirestoreRecyclerOptions<modelMessage> options,Context context) {
+    public ChatAdapter(@NonNull FirestoreRecyclerOptions<modelMessage> options,Context context, String chatroomId) {
         super(options);
         this.context = context;
         this.chatroomId = chatroomId;
