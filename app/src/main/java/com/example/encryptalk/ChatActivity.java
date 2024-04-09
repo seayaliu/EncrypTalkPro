@@ -119,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
         modelMessage.setLastMsgSenderId(FireBaseUtil.currentUserId());
 
         modelMessage.setLastMessage(message);
-
+        modelMessage.setSelfDestruct(selfDestruct);
         FireBaseUtil.getChatroomReference(chatroomId).set(modelMessage);
 //        modelMessage modelMessage = new modelMessage(message,FireBaseUtil.currentUserId(),Timestamp.now());
 //        FireBaseUtil.getChatroomMessageReference(chatroomId).add(modelMessage)
@@ -132,7 +132,7 @@ public class ChatActivity extends AppCompatActivity {
 //                        }
 //                    }
 //                });
-        KeyManager.encodeMessage(message,chatroomId);
+        KeyManager.encodeMessage(message,chatroomId, selfDestruct);
     }
 
     void getOrCreateOpenChatModel() {

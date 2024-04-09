@@ -80,7 +80,7 @@ public class KeyManager extends AppCompatActivity {
     }
 
 
-    public static void encodeMessage(String message, String chatroomId) {
+    public static void encodeMessage(String message, String chatroomId, boolean selfDestruct) {
         FirebaseFirestore mStore;
         mStore = FirebaseFirestore.getInstance();
         DocumentReference docRef = mStore.collection("keys").document(chatroomId);
@@ -119,7 +119,7 @@ public class KeyManager extends AppCompatActivity {
 
                         String encrypted = Base64.getEncoder().encodeToString(encryptedBytes);
 
-                        modelMessage modelMessage = new modelMessage(encrypted, FireBaseUtil.currentUserId(), Timestamp.now());
+                        modelMessage modelMessage = new modelMessage(encrypted, FireBaseUtil.currentUserId(), Timestamp.now(), selfDestruct);
                         FireBaseUtil.getChatroomMessageReference(chatroomId).add(modelMessage);
                         Log.d("key", "Message: "+ message);
                         Log.d("key", "Encrypted: "+ encrypted);
