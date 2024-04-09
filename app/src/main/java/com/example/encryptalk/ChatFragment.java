@@ -29,7 +29,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_chat, container, false);
-        recyclerView = view.findViewById(R.id.recyler_view);
+        recyclerView = view.findViewById(R.id.recycler_view);
         setupRecyclerView();
 
         return view;
@@ -38,7 +38,7 @@ public class ChatFragment extends Fragment {
 
         Query query = FireBaseUtil.allChatroomCollectionReference()
                 .whereArrayContains("userIds",FireBaseUtil.currentUserId())
-                .orderBy("lastMessageTimestamp",Query.Direction.DESCENDING);
+                .orderBy("timestamp",Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<OpenChatModel> options = new FirestoreRecyclerOptions.Builder<OpenChatModel>()
                 .setQuery(query,OpenChatModel.class).build();

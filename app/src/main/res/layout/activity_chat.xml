@@ -35,6 +35,13 @@
             android:layout_centerVertical="true"
             android:id="@+id/back_btn"/>
 
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            />
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
