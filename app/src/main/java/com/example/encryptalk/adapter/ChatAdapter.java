@@ -1,8 +1,9 @@
 package com.example.encryptalk.adapter;
 
+import static android.content.Intent.getIntent;
+
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.encryptalk.ChatActivity;
+import com.example.encryptalk.KeyManager;
 import com.example.encryptalk.R;
+import com.example.encryptalk.model.UserInfo;
 import com.example.encryptalk.model.modelMessage;
 import com.example.encryptalk.utils.AndroidUtil;
 import com.example.encryptalk.utils.FireBaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
@@ -32,15 +41,22 @@ import android.widget.LinearLayout;
 
 import org.w3c.dom.Document;
 
+import java.util.Base64;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
 
 public class ChatAdapter extends FirestoreRecyclerAdapter<modelMessage, ChatAdapter.ChatModelViewHolder> {
 
     Context context;
+    String chatroomId;
     FirebaseFirestore mStore;
 
-    public ChatAdapter(@NonNull FirestoreRecyclerOptions<modelMessage> options,Context context) {
+    public ChatAdapter(@NonNull FirestoreRecyclerOptions<modelMessage> options,Context context, String chatroomId) {
         super(options);
         this.context = context;
+        this.chatroomId = chatroomId;
         mStore = FirebaseFirestore.getInstance();
     }
     @Override
@@ -60,11 +76,41 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<modelMessage, ChatAdap
         if(model.getSenderId().equals(FireBaseUtil.currentUserId())){
             holder.leftChatLayout.setVisibility(View.GONE);
             holder.rightChatLayout.setVisibility(View.VISIBLE);
-            holder.rightChatTextview.setText(model.getMessage());
+            KeyManager k = new KeyManager();
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("keys").document(chatroomId);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String keyString = document.getData().get("Key").toString();
+                            byte[] dKey = Base64.getDecoder().decode(keyString);
+                            SecretKey key = new SecretKeySpec(dKey, 0, dKey.length, "AES");
+                            holder.rightChatTextview.setText(k.decodeMessage(model.getMessage(),key));
+                        }
+                    }
+                }
+            });
         }else{
             holder.rightChatLayout.setVisibility(View.GONE);
             holder.leftChatLayout.setVisibility(View.VISIBLE);
-            holder.leftChatTextview.setText(model.getMessage());
+            KeyManager k = new KeyManager();
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("keys").document(chatroomId);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String keyString = document.getData().get("Key").toString();
+                            byte[] dKey = Base64.getDecoder().decode(keyString);
+                            SecretKey key = new SecretKeySpec(dKey, 0, dKey.length, "AES");
+                            holder.leftChatTextview.setText(k.decodeMessage(model.getMessage(),key));
+                        }
+                    }
+                }
+            });
         }
     }
 

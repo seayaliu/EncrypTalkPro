@@ -9,11 +9,15 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.encryptalk.model.modelMessage;
+import com.example.encryptalk.utils.FireBaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,11 +36,11 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class KeyManager extends AppCompatActivity {
-
-
+    String decrypted;
 
     protected static void createKey() {
         SecretKey key;
@@ -44,7 +48,7 @@ public class KeyManager extends AppCompatActivity {
 
         mStore = FirebaseFirestore.getInstance();
         try {
-            key = KeyGenerator.getInstance("DES").generateKey();
+            key = KeyGenerator.getInstance("AES").generateKey();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -56,8 +60,8 @@ public class KeyManager extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     QueryDocumentSnapshot document = task.getResult().iterator().next();
                     String users = document.getData().get("userIds").toString();
-                    String user1 = users.substring(1,users.indexOf(","));
-                    String user2 = users.substring(users.indexOf(",") + 2, users.indexOf("]"));
+                    String user2 = users.substring(1,users.indexOf(","));
+                    String user1 = users.substring(users.indexOf(",") + 2, users.indexOf("]"));
                     String userId = user1+"_"+user2;
                     DocumentReference docRef = mStore.collection("keys").document(userId);
                     Map<String, Object> keys = new HashMap<>();
@@ -72,28 +76,68 @@ public class KeyManager extends AppCompatActivity {
 
 
 
-        String  text="Testing";
-        byte[] message = text.getBytes();
+
+    }
+
+
+    public static void encodeMessage(String message, String chatroomId, boolean selfDestruct) {
+        FirebaseFirestore mStore;
+        mStore = FirebaseFirestore.getInstance();
+        DocumentReference docRef = mStore.collection("keys").document(chatroomId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String keyString = document.getData().get("Key").toString();
+                        byte[] dKey = Base64.getDecoder().decode(keyString);
+                        SecretKey key = new SecretKeySpec(dKey, 0, dKey.length, "AES");
+                        byte[] bytes = message.getBytes();
+                        Cipher cipher;
+                        try {
+                            cipher = Cipher.getInstance("AES");
+                        } catch (NoSuchAlgorithmException e) {
+                            throw new RuntimeException(e);
+                        } catch (NoSuchPaddingException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            cipher.init(Cipher.ENCRYPT_MODE, key);
+                        } catch (InvalidKeyException e) {
+                            throw new RuntimeException(e);
+                        }
+                        byte[] encryptedBytes;
+                        try {
+                            encryptedBytes = cipher.doFinal(bytes);
+                        } catch (BadPaddingException e) {
+                            throw new RuntimeException(e);
+                        } catch (IllegalBlockSizeException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        String encrypted = Base64.getEncoder().encodeToString(encryptedBytes);
+
+                        modelMessage modelMessage = new modelMessage(encrypted, FireBaseUtil.currentUserId(), Timestamp.now(), selfDestruct);
+                        FireBaseUtil.getChatroomMessageReference(chatroomId).add(modelMessage);
+                        Log.d("key", "Message: "+ message);
+                        Log.d("key", "Encrypted: "+ encrypted);
+                    }
+                }
+            }
+        });
+    }
+    public String decodeMessage(String message, SecretKey key) {
+        byte[] encryptedBytes = Base64.getDecoder().decode(message);
+        Log.d("testtt", message);
+        Log.d("testtt", encryptedBytes.toString());
         Cipher cipher;
         try {
-            cipher = Cipher.getInstance("DES");
+            cipher = Cipher.getInstance("AES");
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         } catch (NoSuchPaddingException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            cipher.init(Cipher.ENCRYPT_MODE, key);
-        } catch (InvalidKeyException e) {
-            throw new RuntimeException(e);
-        }
-        byte[] encryptedBytes;
-        try {
-            encryptedBytes = cipher.doFinal(message);
-        } catch (BadPaddingException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalBlockSizeException e) {
             throw new RuntimeException(e);
         }
 
@@ -102,28 +146,17 @@ public class KeyManager extends AppCompatActivity {
         } catch (InvalidKeyException e) {
             throw new RuntimeException(e);
         }
-        byte[] decryptedBytes;
+        byte[] decryptedBytes = new byte[2];
         try {
             decryptedBytes = cipher.doFinal(encryptedBytes);
-        } catch (BadPaddingException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalBlockSizeException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e){
+
         }
 
-        String encrypted = new String(encryptedBytes);
-        String decrypted = new String(decryptedBytes);
-
-        Log.d("key", "Message: "+ message);
-        Log.d("key", "Encrypted: "+ encrypted);
-        Log.d("key", "Decrypted: "+ decrypted);
+        decrypted = new String(decryptedBytes);
+        Log.d("testt", "Decrypted: "+ decrypted);
+        return decrypted;
     }
-
-
-//    void generateKeys(String user1, String user2) {
-//
-//
-//    }
 //    void retrieveKeys(){
 //
 //    }

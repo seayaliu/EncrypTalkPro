@@ -105,7 +105,7 @@ public class ChatActivity extends AppCompatActivity {
         FirestoreRecyclerOptions<modelMessage> options = new FirestoreRecyclerOptions.Builder<modelMessage>()
                 .setQuery(query,modelMessage.class).build();
 
-        adapter = new ChatAdapter(options,getApplicationContext());
+        adapter = new ChatAdapter(options,getApplicationContext(), chatroomId);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setReverseLayout(true);
         recyclerView.setLayoutManager(manager);
@@ -120,21 +120,19 @@ public class ChatActivity extends AppCompatActivity {
 
         modelMessage.setLastMessage(message);
         modelMessage.setSelfDestruct(selfDestruct);
-
-
         FireBaseUtil.getChatroomReference(chatroomId).set(modelMessage);
-
-        modelMessage modelMessage = new modelMessage(message,FireBaseUtil.currentUserId(),Timestamp.now(), selfDestruct);
-        FireBaseUtil.getChatroomMessageReference(chatroomId).add(modelMessage)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if(task.isSuccessful()){
+//        modelMessage modelMessage = new modelMessage(message,FireBaseUtil.currentUserId(),Timestamp.now());
+//        FireBaseUtil.getChatroomMessageReference(chatroomId).add(modelMessage)
+//                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentReference> task) {
+//                        if(task.isSuccessful()){
                             messageInput.setText("");
-
-                        }
-                    }
-                });
+//
+//                        }
+//                    }
+//                });
+        KeyManager.encodeMessage(message,chatroomId, selfDestruct);
     }
 
     void getOrCreateOpenChatModel() {
