@@ -53,7 +53,12 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         otherUser = AndroidUtil.getUserModelFromIntent(getIntent());
+        otherUsername = findViewById(R.id.other_username);
+        otherUsername.setText(otherUser.getUsername());
+
+
         chatroomId = FireBaseUtil.getChatroomId(FireBaseUtil.currentUserId(), otherUser.getUserId());
+
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageButton = findViewById(R.id.send_message_button);
