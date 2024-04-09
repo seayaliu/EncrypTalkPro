@@ -57,7 +57,6 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<modelMessage, ChatAdap
             }
         }
 
-        Timestamp timestamp = model.getTimestamp();
         if(model.getSenderId().equals(FireBaseUtil.currentUserId())){
             holder.leftChatLayout.setVisibility(View.GONE);
             holder.rightChatLayout.setVisibility(View.VISIBLE);
