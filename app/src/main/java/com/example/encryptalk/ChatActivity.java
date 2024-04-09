@@ -1,9 +1,12 @@
 package com.example.encryptalk;
 
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -39,6 +42,8 @@ public class ChatActivity extends AppCompatActivity {
     TextView otherUsername;
     RecyclerView recyclerView;
     ChatAdapter adapter;
+    Boolean selfDestruct;
+    ToggleButton sd_btn;
 
 
     @Override
@@ -55,9 +60,25 @@ public class ChatActivity extends AppCompatActivity {
         backButton = findViewById(R.id.back_btn);
         otherUsername = findViewById(R.id.other_username);
         recyclerView = findViewById(R.id.recycler_view);
+        sd_btn = findViewById(R.id.sd_btn);
+        selfDestruct = sd_btn.isChecked();
+
 
         backButton.setOnClickListener((v) -> {
             onBackPressed();
+        });
+
+        sd_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean checked) {
+                if (checked) {
+                    Toast.makeText(ChatActivity.this, "Self-Destruct ON", Toast.LENGTH_SHORT).show();
+                    selfDestruct = true;
+                } else {
+                    Toast.makeText(ChatActivity.this, "Self-Destruct OFF", Toast.LENGTH_SHORT).show();
+                    selfDestruct = false;
+                }
+            }
         });
 
         sendMessageButton.setOnClickListener((v -> {
@@ -93,10 +114,12 @@ public class ChatActivity extends AppCompatActivity {
         modelMessage.setLastMsgSenderId(FireBaseUtil.currentUserId());
 
         modelMessage.setLastMessage(message);
+        modelMessage.setSelfDestruct(selfDestruct);
+
 
         FireBaseUtil.getChatroomReference(chatroomId).set(modelMessage);
 
-        modelMessage modelMessage = new modelMessage(message,FireBaseUtil.currentUserId(),Timestamp.now());
+        modelMessage modelMessage = new modelMessage(message,FireBaseUtil.currentUserId(),Timestamp.now(), selfDestruct);
         FireBaseUtil.getChatroomMessageReference(chatroomId).add(modelMessage)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
@@ -118,7 +141,8 @@ public class ChatActivity extends AppCompatActivity {
                             chatroomId,
                             Arrays.asList(FireBaseUtil.currentUserId(), otherUser.getUserId()),
                             Timestamp.now(),
-                            ""
+                            "",
+                            selfDestruct
                     );
                     FireBaseUtil.getChatroomReference(chatroomId).set(modelMessage);
                     KeyManager.createKey();

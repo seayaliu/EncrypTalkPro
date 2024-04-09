@@ -11,15 +11,20 @@ public class OpenChatModel {
     String lastMsgSenderId;
     String lastMessage;
 
+    Boolean selfDestruct;
+
 
     public OpenChatModel() {
     }
 
-    public OpenChatModel(String chatroomId, List<String> userIds, Timestamp timestamp, String lastMsgSenderId) {
+
+
+    public OpenChatModel(String chatroomId, List<String> userIds, Timestamp timestamp, String lastMsgSenderId, Boolean selfDestruct) {
         this.chatroomId = chatroomId;
         this.userIds = userIds;
         this.timestamp = timestamp;
         this.lastMsgSenderId = lastMsgSenderId;
+        this.selfDestruct = selfDestruct;
     }
 
     public String getChatroomId() {
@@ -53,6 +58,14 @@ public class OpenChatModel {
     public void setLastMsgSenderId(String lastMsgSenderId) {
         this.lastMsgSenderId = lastMsgSenderId;
 
+    }
+
+    public Boolean getSelfDestruct() {
+        return selfDestruct;
+    }
+
+    public void setSelfDestruct(Boolean selfDestruct) {
+        this.selfDestruct = selfDestruct;
     }
 
     public String getLastMessage() {
